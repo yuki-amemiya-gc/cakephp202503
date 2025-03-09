@@ -2,7 +2,7 @@ services:
   web:
     build: ./web
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./web/app:/var/www/html
     depends_on:
@@ -11,7 +11,7 @@ services:
   db:
     build: ./db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: cakephp
@@ -19,24 +19,3 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - ./db/data:/var/lib/mysql  # データ永続化
-
-
-# ■起動
-# docker-compose up -d --build
-# docker-compose up -d
-# docker run --rm -it almalinux:9.5 /bin/bash
-# ■削除
-# docker-compose down
-# ■起動確認
-# docker ps -a
-# ■アクセス
-# docker exec -it cakephp-web-1 bash
-# docker exec -it cakephp-db-1 bash
-# docker exec -it cakephp-db-1 mysql -u user -p
-# ls -al /etc/mysql/conf.d/my.cnf
-#
-# ■ログ
-# docker logs db 
-# telnet localhost 3306
-# ■確認
-# http://localhost/hello
