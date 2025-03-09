@@ -19,4 +19,4 @@ ls -al /etc/mysql/conf.d/my.cnf
 docker logs db 
 telnet localhost 3306
 ■確認
-http://localhost/hello
+http://localhost:8080/hello

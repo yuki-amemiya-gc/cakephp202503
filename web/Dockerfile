@@ -14,13 +14,12 @@ WORKDIR /tmp
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer
 
-# CakePHP のインストール
-WORKDIR /var/www/html
+# CakePHP のインストール (安全な方法)
+WORKDIR /tmp
 RUN wget https://github.com/cakephp/app/archive/refs/heads/4.x.zip && \
     unzip 4.x.zip && \
-    mv app-4.x/* ./ && \
-    rm -rf app-4.x 4.x.zip && \
-    composer install --no-dev --prefer-dist
+    mv app-4.x/* /var/www/html && \
+    rm -rf 4.x.zip app-4.x
 
 # Apache の設定ファイルを追加
 RUN cat <<EOF > /etc/httpd/conf.d/cakephp.conf
@@ -40,11 +39,10 @@ RUN echo "ServerName localhost" >> /etc/httpd/conf/httpd.conf
 RUN mkdir -p /run/php-fpm && \
     chown -R apache:apache /run/php-fpm
 
-# 権限を調整
-RUN chown -R apache:apache /var/www/html && chmod -R 755 /var/www/html
-
 # ポートを開放
 EXPOSE 80
 
-# Apache と PHP-FPM を一緒に実行
-CMD /usr/sbin/php-fpm && /usr/sbin/httpd -D FOREGROUND
+# コンテナ起動時に `composer install` を実行し、権限を調整
+CMD if [ ! -d "/var/www/html/vendor" ]; then composer install --no-dev --prefer-dist; fi && \
+    chown -R apache:apache /var/www/html && chmod -R 755 /var/www/html && \
+    /usr/sbin/php-fpm && /usr/sbin/httpd -D FOREGROUND
