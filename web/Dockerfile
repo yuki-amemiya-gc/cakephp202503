@@ -43,6 +43,10 @@ RUN mkdir -p /run/php-fpm && \
 EXPOSE 80
 
 # コンテナ起動時に `composer install` を実行し、権限を調整
-CMD if [ ! -d "/var/www/html/vendor" ]; then composer install --no-dev --prefer-dist; fi && \
+CMD cd /var/www/html && \
+    if [ ! -d "vendor" ]; then \
+        composer install --no-dev --prefer-dist && \
+        composer require --dev cakephp/debug_kit; \
+    fi && \
     chown -R apache:apache /var/www/html && chmod -R 755 /var/www/html && \
     /usr/sbin/php-fpm && /usr/sbin/httpd -D FOREGROUND
