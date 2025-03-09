@@ -38,3 +38,5 @@ services:
 # ■ログ
 # docker logs db 
 # telnet localhost 3306
+# ■確認
+# http://localhost/hello
