@@ -9,8 +9,11 @@ docker-compose down
 ■起動確認
 docker ps -a
 
-■アクセス
+■WEBアクセス
 docker exec -it cakephp202503-web-1 bash
+cd /var/www/html
+
+■DBアクセス
 docker exec -it cakephp202503-db-1 bash
 docker exec -it cakephp202503-db-1 mysql -u user -p
 ls -al /etc/mysql/conf.d/my.cnf
