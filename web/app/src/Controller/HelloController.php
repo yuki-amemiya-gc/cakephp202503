@@ -7,7 +7,7 @@ class HelloController extends AppController
 {
     public function index()
     {
-        $this->autoRender = false;
-        echo "Hello, World!";
+        // ビューに渡す変数をセット（任意）
+        $this->set('message', 'Hello, World!');
     }
 }
