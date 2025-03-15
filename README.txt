@@ -10,9 +10,9 @@ docker-compose down
 docker ps -a
 
 ■アクセス
-docker exec -it cakephp-web-1 bash
-docker exec -it cakephp-db-1 bash
-docker exec -it cakephp-db-1 mysql -u user -p
+docker exec -it cakephp202503-web-1 bash
+docker exec -it cakephp202503-db-1 bash
+docker exec -it cakephp202503-db-1 mysql -u user -p
 ls -al /etc/mysql/conf.d/my.cnf
 
 ■ログ
