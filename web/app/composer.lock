@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77e5d74ac5ed0e27b2d02fa7354bc182",
+    "content-hash": "aae30d08efa40d979bed66f15027dffe",
     "packages": [
         {
             "name": "cakephp/cakephp",
@@ -1184,6 +1184,55 @@
                 "source": "https://github.com/cakephp/phinx/tree/0.13.4"
             },
             "time": "2023-01-07T00:42:55+00:00"
+        },
+        {
+            "name": "salines/cakephp4-soft-delete",
+            "version": "1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/salines/cakephp4-soft-delete.git",
+                "reference": "f6fe95008a7f5af252fbb9797a61df117e35f127"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/salines/cakephp4-soft-delete/zipball/f6fe95008a7f5af252fbb9797a61df117e35f127",
+                "reference": "f6fe95008a7f5af252fbb9797a61df117e35f127",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": ">=4.0",
+                "cakephp/plugin-installer": "*",
+                "php": ">=7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "SoftDelete\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "SoftDelete plugin updated for CakePHP 4",
+            "homepage": "https://github.com/salines/cakephp4-soft-delete",
+            "keywords": [
+                "cakephp",
+                "cakephp 4",
+                "deletable",
+                "delete",
+                "plugin",
+                "soft"
+            ],
+            "support": {
+                "issues": "https://github.com/salines/cakephp4-soft-delete/issues",
+                "source": "https://github.com/salines/cakephp4-soft-delete"
+            },
+            "abandoned": true,
+            "time": "2020-08-16T10:27:19+00:00"
         },
         {
             "name": "symfony/config",

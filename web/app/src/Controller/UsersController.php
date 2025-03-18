@@ -18,8 +18,8 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $users = $this->paginate($this->Users);
-
+        $users = $this->paginate($this->Users->find('active'), ['limit' => 2]);
+    
         $this->set(compact('users'));
     }
 
@@ -33,7 +33,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => ['LoginHistorys'],
+            'contain' => [],
         ]);
 
         $this->set(compact('user'));
@@ -46,10 +46,10 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->Users->newEmptyEntity();
+        $user = $this->Users->newEmptyEntity(); // 新しいユーザのEntity（テーブルのレコードに相当）を作成
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
+            $user = $this->Users->patchEntity($user, $this->request->getData()); //patchEntityでフォームの名前とテーブルカラム名が同じであれば左の一行ですむ
+            if ($this->Users->save($user)) {//
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -69,7 +69,7 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => [],
+            'contain' => [], //関連データを同時に取得
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -94,6 +94,8 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        $user->deleted = date('Y-m-d H:i:s');
+
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user has been deleted.'));
         } else {
