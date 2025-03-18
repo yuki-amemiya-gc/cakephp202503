@@ -25,14 +25,14 @@
             <tbody>
                 <?php foreach ($users as $user): ?>
                 <tr>
-                    <td><?= $this->Number->format($user->id) ?></td>
-                    <td><?= h($user->account) ?></td>
-                    <td><?= h($user->name) ?></td>
-                    <td><?= h($user->email) ?></td>
-                    <td><?= h($user->created) ?></td>
-                    <td><?= h($user->modified) ?></td>
-                    <td><?= h($user->created_user) ?></td>
-                    <td><?= h($user->modified_user) ?></td>
+                  <td><?= $this->Number->format($user->id) ?></td>
+                  <td><?= h($user->account) ?></td>
+                  <td><?= h($user->name) ?></td>
+                  <td><?= h($user->email) ?></td>
+                  <td><?= h(date('Y年m月d日 H時i分s秒', strtotime($user->created))) ?></td>
+                  <td><?= h(date('Y年m月d日 H時i分s秒', strtotime($user->modified))) ?></td>
+                  <td><?= h($user->created_user) ?></td>
+                  <td><?= h($user->modified_user) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>

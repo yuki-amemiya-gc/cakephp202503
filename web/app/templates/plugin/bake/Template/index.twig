@@ -49,12 +49,12 @@
 {% endif %}
 {% if isKey is not same as(true) %}
 {% set columnData = Bake.columnData(field, schema) %}
-{% if columnData.type not in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
-                    <td><?= h(${{ singularVar }}->{{ field }}) ?></td>
-{% elseif columnData.null %}
-                    <td><?= ${{ singularVar }}->{{ field }} === null ? '' : $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+{% if columnData.type in ['integer', 'float', 'decimal', 'biginteger', 'smallinteger', 'tinyinteger'] %}
+                  <td><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+{% elseif columnData.type in ['timestamp']%}
+                  <td><?= h(date('Y年m月d日 H時i分s秒', strtotime(${{ singularVar }}->{{ field }}))) ?></td>
 {% else %}
-                    <td><?= $this->Number->format(${{ singularVar }}->{{ field }}) ?></td>
+                  <td><?= h(${{ singularVar }}->{{ field }}) ?></td>
 {% endif %}
 {% endif %}
 {% endfor %}
