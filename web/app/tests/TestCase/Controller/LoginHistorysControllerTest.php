@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace App\Test\TestCase\Controller;
 
-use App\Controller\UsersController;
+use App\Controller\LoginHistorysController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Controller\UsersController Test Case
+ * App\Controller\LoginHistorysController Test Case
  *
- * @uses \App\Controller\UsersController
+ * @uses \App\Controller\LoginHistorysController
  */
-class UsersControllerTest extends TestCase
+class LoginHistorysControllerTest extends TestCase
 {
     use IntegrationTestTrait;
 
@@ -22,15 +22,15 @@ class UsersControllerTest extends TestCase
      * @var array<string>
      */
     protected $fixtures = [
-        'app.Users',
         'app.LoginHistorys',
+        'app.Users',
     ];
 
     /**
      * Test index method
      *
      * @return void
-     * @uses \App\Controller\UsersController::index()
+     * @uses \App\Controller\LoginHistorysController::index()
      */
     public function testIndex(): void
     {
@@ -41,7 +41,7 @@ class UsersControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \App\Controller\UsersController::view()
+     * @uses \App\Controller\LoginHistorysController::view()
      */
     public function testView(): void
     {
@@ -52,7 +52,7 @@ class UsersControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \App\Controller\UsersController::add()
+     * @uses \App\Controller\LoginHistorysController::add()
      */
     public function testAdd(): void
     {
@@ -63,7 +63,7 @@ class UsersControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \App\Controller\UsersController::edit()
+     * @uses \App\Controller\LoginHistorysController::edit()
      */
     public function testEdit(): void
     {
@@ -74,7 +74,7 @@ class UsersControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \App\Controller\UsersController::delete()
+     * @uses \App\Controller\LoginHistorysController::delete()
      */
     public function testDelete(): void
     {
