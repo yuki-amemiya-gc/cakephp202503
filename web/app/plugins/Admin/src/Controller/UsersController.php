@@ -11,7 +11,7 @@ use Admin\Controller\AppController;
  * @property \Admin\Model\Table\UsersTable $Users
  * @method \Admin\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class UsersController extends AppController
+class UsersController extends AdminController
 {
     /**
      * Index method
