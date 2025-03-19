@@ -53,6 +53,17 @@ class UsersTableTest extends TestCase
     }
 
     /**
+     * Test findActive method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::findActive()
+     */
+    public function testFindActive(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
      * Test validationDefault method
      *
      * @return void
@@ -70,6 +81,72 @@ class UsersTableTest extends TestCase
      * @uses \App\Model\Table\UsersTable::buildRules()
      */
     public function testBuildRules(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test query method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::query()
+     */
+    public function testQuery(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test deleteAll method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::deleteAll()
+     */
+    public function testDeleteAll(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test getSoftDeleteField method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::getSoftDeleteField()
+     */
+    public function testGetSoftDeleteField(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test hardDelete method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::hardDelete()
+     */
+    public function testHardDelete(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test hardDeleteAll method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::hardDeleteAll()
+     */
+    public function testHardDeleteAll(): void
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test restore method
+     *
+     * @return void
+     * @uses \App\Model\Table\UsersTable::restore()
+     */
+    public function testRestore(): void
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

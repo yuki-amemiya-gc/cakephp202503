@@ -7,7 +7,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use SoftDelete\Model\Table\SoftDeleteTrait;
 
 /**
  * Users Model
@@ -32,9 +31,6 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  */
 class UsersTable extends Table
 {
-    use SoftDeleteTrait;
-
-    protected $softDeleteField = 'deleted'; 
     /**
      * Initialize method
      *
@@ -54,12 +50,6 @@ class UsersTable extends Table
         $this->hasMany('LoginHistorys', [
             'foreignKey' => 'user_id',
         ]);
-    }
-
-    // Apply default condition to filter out soft-deleted users
-    public function findActive(Query $query, array $options)
-    {
-        return $query->where(['deleted IS' => null]);
     }
 
     /**
@@ -91,6 +81,10 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->notEmptyString('email');
+
+        $validator
+            ->dateTime('deleted')
+            ->allowEmptyDateTime('deleted');
 
         $validator
             ->scalar('created_user')

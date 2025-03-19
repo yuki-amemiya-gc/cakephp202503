@@ -8,11 +8,21 @@ use Admin\Controller\AppController;
 /**
  * Users Controller
  *
- * @property \Admin\Model\Table\UsersTable $Users
- * @method \Admin\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @property \App\Model\Table\UsersTable $Users * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AdminController
 {
+    /**
+     * Initialize controller
+     *
+     * @return void
+     */
+    public function initialize(): void
+    {
+        parent::initialize();
+        $this->Users = $this->fetchTable('Users');
+    }
+
     /**
      * Index method
      *
@@ -20,6 +30,10 @@ class UsersController extends AdminController
      */
     public function index()
     {
+
+        debug($this->Users);
+        debug($this->Users->find()->all());
+
         $users = $this->paginate($this->Users);
 
         $this->set(compact('users'));
