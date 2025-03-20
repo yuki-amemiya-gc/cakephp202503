@@ -228,4 +228,12 @@ class RostersController extends AppController
             }
         }
     }
+    /**
+     * beforeFilter method
+     */
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['stamp']);
+    }
 }

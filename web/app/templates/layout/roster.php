@@ -21,6 +21,11 @@
         <div class="top-nav-title">
             <span style="font-size: 2em;"><?= $this->fetch('title') ?></span>
         </div>
+        <div class="top-nav-links">
+            <?php if($this->request->getSession()->read('Auth')) : ?>
+                <?= $this->Html->link(__('Logout'), ['controller' => 'Users', 'action' => 'logout']) ?>
+            <?php endif; ?>
+        </div>
     </nav>
     <main class="main">
         <div class="container">

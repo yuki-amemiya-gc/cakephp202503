@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Controller;
@@ -12,96 +13,47 @@ namespace App\Controller;
 class UsersController extends AppController
 {
     /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null|void Renders view
+     * beforeFilter method
      */
-    public function index()
+    public function beforeFilter(\Cake\Event\EventInterface $event)
     {
-        $users = $this->paginate($this->Users->find('active'), ['limit' => 2]);
-    
-        $this->set(compact('users'));
+        parent::beforeFilter($event);
+        $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * login method
      */
-    public function view($id = null)
+    public function login()
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
+        $this->request->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+        // POST, GETを問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            // ログインに成功した場合、打刻画面にリダイレクトします
+            $redirect = $this->request->getQuery('redirect', [
+                'controller' => 'Rosters',
+                'action' => 'stamp',
+            ]);
 
-        $this->set(compact('user'));
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $user = $this->Users->newEmptyEntity(); // 新しいユーザのEntity（テーブルのレコードに相当）を作成
-        if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData()); //patchEntityでフォームの名前とテーブルカラム名が同じであれば左の一行ですむ
-            if ($this->Users->save($user)) {//
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            return $this->redirect($redirect);
         }
-        $this->set(compact('user'));
+        // ユーザーがsubmit後、認証失敗した場合は、エラーを表示します
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Invalid username or password'));
+        }
     }
 
     /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * logout method
      */
-    public function edit($id = null)
+    public function logout()
     {
-        $user = $this->Users->get($id, [
-            'contain' => [], //関連データを同時に取得
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+        $result = $this->Authentication->getResult();
+        // POST, GETを問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
-        $this->set(compact('user'));
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Http\Response|null|void Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        $user->deleted = date('Y-m-d H:i:s');
-
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
-        } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
     }
 }
