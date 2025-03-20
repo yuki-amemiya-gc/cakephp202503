@@ -124,7 +124,7 @@ class UsersController extends AdminController
         parent::beforeFilter($event);
         // 認証を必要としないログインアクションを構成し、
         // 無限リダイレクトループの問題を防ぎます
-        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
+        $this->Authentication->addUnauthenticatedActions(['login']);
     }
 
     // public function login()
@@ -168,5 +168,15 @@ class UsersController extends AdminController
         if ($this->request->is('post') && !$result->isValid()) {
             $this->Flash->error(__('Invalid username or password'));
         }
-    }   
+    }
+    
+    public function logout()
+    {
+        $result = $this->Authentication->getResult();
+        // POST, GETを問わず、ユーザーがログインしている場合はリダイレクトします
+        if ($result->isValid()) {
+            $this->Authentication->logout();
+            return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+        }
+    }
 }
