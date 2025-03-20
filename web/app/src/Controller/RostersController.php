@@ -19,10 +19,19 @@ class RostersController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users'],
-        ];
-        $rosters = $this->paginate($this->Rosters);
+        // 認証情報からアカウントIDを取得する。
+        $auth = $this->request->getSession()->read('Auth');
+
+        // 認証情報が取得できない場合はログイン画面にリダイレクトする。
+        if (!$auth) {
+            return $this->redirect(['controller' => 'Users', 'action' => 'logout']);
+        }
+
+        // 勤怠データ取得
+        $rosters = $this->Rosters->find()
+            ->select(['id', 'start_time', 'end_time', 'status', 'reason'])
+            ->where(['Rosters.users_id' => $auth->id])
+            ->order(['Rosters.created' => 'asc']);
 
         $this->set(compact('rosters'));
     }
