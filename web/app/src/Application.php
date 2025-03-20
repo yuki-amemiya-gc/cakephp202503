@@ -28,13 +28,23 @@ use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 
+
+//認証機能周り
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Cake\Routing\Router;
+use Psr\Http\Message\ServerRequestInterface;
+
+
 /**
  * Application setup class.
  *
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -101,7 +111,12 @@ class Application extends BaseApplication
             // https://book.cakephp.org/4/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
                 'httponly' => true,
-            ]));
+            ]))
+
+            // 認証機能
+            ->add(new RoutingMiddleware($this))
+            // RoutingMiddleware の後に認証を追加
+            ->add(new AuthenticationMiddleware($this));
 
         return $middlewareQueue;
     }
@@ -131,5 +146,37 @@ class Application extends BaseApplication
         $this->addPlugin('Migrations');
 
         // Load more plugins here
+    }
+    
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+          // プラグイン名を取得する
+          $pluginName = $request->getParam('plugin');
+          $plugin = null !== $pluginName ? strtolower($pluginName).'/' : '';
+  
+          $authenticationService = new AuthenticationService([
+              'unauthenticatedRedirect' => Router::url($plugin.'users/login'),
+          ]);
+  
+          // identifiers account と password のフィールドを確認します
+          $authenticationService->loadIdentifier('Authentication.Password', [
+              'fields' => [
+                  'username' => 'account',
+                  'password' => 'password',
+              ]
+          ]);
+  
+          // authenticatorsをロードしたら, 最初にセッションが必要です
+          $authenticationService->loadAuthenticator('Authentication.Session');
+          // 入力した account と password をチェックする為のフォームデータを設定します
+          $authenticationService->loadAuthenticator('Authentication.Form', [
+              'fields' => [
+                  'username' => 'account',
+                  'password' => 'password',
+              ],
+              'loginUrl' => Router::url($plugin.'users/login'),
+          ]);
+  
+          return $authenticationService;
     }
 }

@@ -118,4 +118,55 @@ class UsersController extends AdminController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // 認証を必要としないログインアクションを構成し、
+        // 無限リダイレクトループの問題を防ぎます
+        $this->Authentication->addUnauthenticatedActions(['login', 'add']);
+    }
+
+    // public function login()
+    // {
+    //     $this->request->allowMethod(['get', 'post']);
+    //     $result = $this->Authentication->getResult();
+    //     // POST, GETを問わず、ユーザーがログインしている場合はリダイレクトします
+    //     if ($result->isValid()) {
+    //         // ログインに成功した場合、ユーザー一覧にリダイレクトします
+    //         $redirect = $this->request->getQuery('redirect', [
+    //             'controller' => 'Users',
+    //             'action' => 'index',
+    //         ]);
+
+    //         return $this->redirect($redirect);
+    //     }
+    //     // ユーザーがsubmit後、認証失敗した場合は、エラーを表示します
+    //     if ($this->request->is('post') && !$result->isValid()) {
+    //         $this->Flash->error(__('Invalid username or password'));
+    //     }
+    // }
+
+    public function login()
+    {
+        $this->request->allowMethod(['get', 'post']);
+        $result = $this->Authentication->getResult();
+    
+        if ($result->isValid()) {
+            // ユーザー情報を取得
+            $user = $this->Authentication->getIdentity();
+            
+            // リダイレクト先が login ではないことを保証
+            $redirect = $this->request->getQuery('redirect');
+            if (!$redirect || $redirect === ['controller' => 'Users', 'action' => 'login']) {
+                $redirect = ['controller' => 'Users', 'action' => 'index'];
+            }
+    
+            return $this->redirect($redirect);
+        }
+    
+        if ($this->request->is('post') && !$result->isValid()) {
+            $this->Flash->error(__('Invalid username or password'));
+        }
+    }   
 }
