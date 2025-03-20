@@ -19,21 +19,47 @@ class RostersController extends AppController
      */
     public function index()
     {
-        // 認証情報からアカウントIDを取得する。
-        $auth = $this->request->getSession()->read('Auth');
+        $condition = "";
 
-        // 認証情報が取得できない場合はログイン画面にリダイレクトする。
-        if (!$auth) {
-            return $this->redirect(['controller' => 'Users', 'action' => 'logout']);
+        // 検索条件で使用する年を、データとして存在する年から取得する
+        $years = $this->Rosters->find('list', ['keyField' => 'year', 'valueField' => 'year'])
+            ->select(['year' => 'DATE_FORMAT(start_time, \'%Y\')'])
+            ->group(['year']);
+
+        if ($this->request->is('post')) {
+            // 認証情報からアカウントIDを取得する
+            $auth = $this->Authentication->getIdentity(); // CakePHP 4+
+
+            // 認証情報が取得できない場合はログイン画面にリダイレクトする
+            if (!$auth) {
+                return $this->redirect(['controller' => 'Users', 'action' => 'login']);
+            }
+
+            // データ抽出期間を検索条件から生成
+            $condition = $this->request->getData();
+            $start = new FrozenTime($condition['year'] . '-' . $condition['month'] . '-01' . ' 00:00:00');
+            $end = (clone $start)->addMonth(1);
+
+            // 勤怠データ取得
+            $tmpRosters = $this->Rosters->find()
+                ->select(['id', 'day' => 'DATE_FORMAT(start_time, \'%d\')', 'start_time', 'end_time', 'status', 'reason'])
+                ->where(['users_id' => $auth->id])
+                ->where(['start_time >=' => $start])
+                ->where(['start_time <' => $end])
+                ->order(['start_time' => 'asc']);
+
+            // 取得したデータを１ヶ月分の配列にセットする
+            $lastDay = (new FrozenTime())->modify('last day of ' . $condition['year'] . '-' . $condition['month'])->i18nFormat('dd');
+            $rosters = array_fill(1, (int)$lastDay, null);
+
+            foreach ($tmpRosters as $roster) {
+                $rosters[$roster->day] = $roster;
+            }
+
+            $this->set(compact('rosters'));
         }
 
-        // 勤怠データ取得
-        $rosters = $this->Rosters->find()
-            ->select(['id', 'start_time', 'end_time', 'status', 'reason'])
-            ->where(['Rosters.users_id' => $auth->id])
-            ->order(['Rosters.created' => 'asc']);
-
-        $this->set(compact('rosters'));
+        $this->set(compact('years', 'condition'));
     }
 
     /**
