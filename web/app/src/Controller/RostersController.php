@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
+use Cake\I18n\FrozenTime;
 
 /**
  * Rosters Controller
@@ -106,5 +107,52 @@ class RostersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+
+    public function stamp() {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $account = $this->request->getData('account');
+            $kubun = $this->request->getData('kubun');
+
+            // エンティティにpatchするための配列
+            $tmpArr = array();
+            $msg = '';
+
+            // 区分から出勤、退勤時刻を判断し日時を取得する
+            if ($kubun === 'sta') {
+                $tmpArr['start_time'] = FrozenTime::now();
+                $msg = 'おはようございます。';
+            }
+            elseif ($kubun === 'end') {
+                $tmpArr['end_time'] = FrozenTime::now();
+                $msg = 'お疲れさまでした。';
+            }
+
+            // accountからユーザーID取得
+            $this->Users = $this->fetchTable('Users');
+            $user = $this->Users->find()->where(['account' => $account])->first();
+
+            // ユーザー情報が取得できたら打刻する
+            if ($user) {
+                $tmpArr['users_id'] = $user->id;
+
+                // 保存用エンティティの生成
+                $roster = $this->Rosters->newEmptyEntity();
+                $roster = $this->Rosters->patchEntity($roster, $tmpArr);
+
+                if ($this->Rosters->save($roster)) {
+                    $this->Flash->success($msg);
+                }
+                else {
+                    $this->Flash->error('打刻でエラーが発生しました。');
+                }
+            }
+            else {
+                $this->Flash->error('入力されたアカウントが存在しません。');
+            }
+        }
+
+        $this -> render ( "stamp", "roster" );
     }
 }
