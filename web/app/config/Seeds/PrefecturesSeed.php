@@ -16,7 +16,7 @@ class PrefecturesSeed extends AbstractSeed
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $data = [
             [
