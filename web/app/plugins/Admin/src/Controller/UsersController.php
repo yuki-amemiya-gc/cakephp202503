@@ -31,8 +31,8 @@ class UsersController extends AdminController
     public function index()
     {
 
-        debug($this->Users);
-        debug($this->Users->find()->all());
+        // debug($this->Users);
+        // debug($this->Users->find()->all());
 
         $users = $this->paginate($this->Users);
 
