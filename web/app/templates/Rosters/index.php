@@ -48,14 +48,15 @@ if (empty($condition)) {
                 </thead>
                 <tbody>
                     <?php foreach ($rosters as $key => $roster) : ?>
+                        <?php $date = new FrozenTime($condition['year'] . '-' . $condition['month'] . '-' . $key) ?>
                         <tr>
-                            <td><?= h((new FrozenTime($condition['year'] . '-' . $condition['month'] . '-' . $key))->i18nFormat('d日（E）')) ?></td>
+                            <td><?= h($date->i18nFormat('d日（E）')) ?></td>
                             <td><?= empty($roster->start_time) ? '' : h($roster->start_time->i18nFormat('HH:mm')) ?></td>
                             <td><?= empty($roster->end_time) ? '' : h($roster->end_time->i18nFormat('HH:mm')) ?></td>
                             <td><?= empty($roster->status) ? '' : $this->Number->format($roster->status) ?></td>
                             <td><?= empty($roster->reason) ? '' : h($roster->reason) ?></td>
                             <td class="actions">
-                                <?= empty($roster) ? '' : $this->Html->link(__('Edit'), ['action' => 'edit', $roster->id]) ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', empty($roster) ? '' : $roster->id, '?' => ['date' => $date->i18nFormat('yyyy-MM-dd 00:00')]]) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

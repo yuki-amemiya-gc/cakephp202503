@@ -23,14 +23,14 @@
             <fieldset>
                 <legend><?= __('Edit Roster') ?></legend>
                 <?php
-                    echo $this->Form->control('users_id', ['options' => $users]);
+                    echo $this->Form->control('users_id', ['disabled' => true]);
                     echo $this->Form->control('start_time', ['empty' => true]);
                     echo $this->Form->control('end_time', ['empty' => true]);
                     echo $this->Form->control('status');
                     echo $this->Form->control('reason');
-                    echo $this->Form->control('deleted', ['empty' => true]);
-                    echo $this->Form->control('created_user');
-                    echo $this->Form->control('modified_user');
+                    // echo $this->Form->control('deleted', ['empty' => true]);
+                    // echo $this->Form->control('created_user');
+                    // echo $this->Form->control('modified_user');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

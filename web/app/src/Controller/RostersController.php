@@ -53,7 +53,7 @@ class RostersController extends AppController
             $rosters = array_fill(1, (int)$lastDay, null);
 
             foreach ($tmpRosters as $roster) {
-                $rosters[$roster->day] = $roster;
+                $rosters[intval($roster->day)] = $roster;
             }
 
             $this->set(compact('rosters'));
@@ -108,9 +108,20 @@ class RostersController extends AppController
      */
     public function edit($id = null)
     {
-        $roster = $this->Rosters->get($id, [
-            'contain' => [],
-        ]);
+        $user = $this->Authentication->getIdentity();
+        $roster = null;
+
+        if (empty($id)) {
+            $roster = $this->Rosters->newEmptyEntity();
+            $roster->users_id = $user->id;
+            $roster->start_time = new FrozenTime($this->request->getQuery('date'));
+            $roster->end_time = new FrozenTime($this->request->getQuery('date'));
+        } else {
+            $roster = $this->Rosters->get($id, [
+                'contain' => [],
+            ]);
+        }
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $roster = $this->Rosters->patchEntity($roster, $this->request->getData());
             if ($this->Rosters->save($roster)) {
