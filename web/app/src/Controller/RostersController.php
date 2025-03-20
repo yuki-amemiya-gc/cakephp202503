@@ -110,7 +110,7 @@ class RostersController extends AppController
     {
         $user = $this->Authentication->getIdentity();
         $roster = null;
-
+    
         if (empty($id)) {
             $roster = $this->Rosters->newEmptyEntity();
             $roster->users_id = $user->id;
@@ -121,16 +121,37 @@ class RostersController extends AppController
                 'contain' => [],
             ]);
         }
-
+    
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $roster = $this->Rosters->patchEntity($roster, $this->request->getData());
+            $data = $this->request->getData();
+    
+            // Convert input times to DateTime format
+            $originalStart = $roster->start_time;
+            $originalEnd = $roster->end_time;
+    
+            try {
+                $startTime = new FrozenTime($data['start_time']);
+                $endTime = new FrozenTime($data['end_time']);
+    
+                // Preserve the original date and only update hour, minute, second
+                $newStart = $originalStart->setTime($startTime->hour, $startTime->minute, $startTime->second);
+                $newEnd = $originalEnd->setTime($endTime->hour, $endTime->minute, $endTime->second);
+    
+                $roster->start_time = $newStart;
+                $roster->end_time = $newEnd;
+            } catch (\Exception $e) {
+                $this->Flash->error(__('Invalid time format.'));
+            }
+    
+            $roster = $this->Rosters->patchEntity($roster, $data, ['fields' => ['status', 'reason']]);
+    
             if ($this->Rosters->save($roster)) {
                 $this->Flash->success(__('The roster has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The roster could not be saved. Please, try again.'));
         }
+    
         $users = $this->Rosters->Users->find('list', ['limit' => 200])->all();
         $this->set(compact('roster', 'users'));
     }
