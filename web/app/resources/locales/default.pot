@@ -1,0 +1,366 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2025-03-21 16:10+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: ./src/Controller/LoginHistorysController.php:56
+#: ./src/Controller/LoginHistorysController.php:81
+msgid "The login history has been saved."
+msgstr ""
+
+#: ./src/Controller/LoginHistorysController.php:60
+#: ./src/Controller/LoginHistorysController.php:85
+msgid "The login history could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/LoginHistorysController.php:103
+msgid "The login history has been deleted."
+msgstr ""
+
+#: ./src/Controller/LoginHistorysController.php:105
+msgid "The login history could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/RostersController.php:94
+#: ./src/Controller/RostersController.php:176
+msgid "The roster has been saved."
+msgstr ""
+
+#: ./src/Controller/RostersController.php:98
+#: ./src/Controller/RostersController.php:180
+msgid "The roster could not be saved. Please, try again."
+msgstr ""
+
+#: ./src/Controller/RostersController.php:140
+msgid "Start time and end time cannot be empty."
+msgstr ""
+
+#: ./src/Controller/RostersController.php:166
+msgid "Invalid time format."
+msgstr ""
+
+#: ./src/Controller/RostersController.php:199
+msgid "The roster has been deleted."
+msgstr ""
+
+#: ./src/Controller/RostersController.php:201
+msgid "The roster could not be deleted. Please, try again."
+msgstr ""
+
+#: ./src/Controller/UsersController.php:43
+msgid "Invalid username or password"
+msgstr ""
+
+#: ./templates/LoginHistorys/add.php:11
+#: ./templates/LoginHistorys/edit.php:11
+#: ./templates/LoginHistorys/index.php:22
+#: ./templates/LoginHistorys/view.php:10
+#: ./templates/Rosters/add.php:11
+#: ./templates/Rosters/edit.php:11
+#: ./templates/Rosters/index.php:46
+#: ./templates/Rosters/view.php:10
+#: ./templates/Users/add.php:10
+#: ./templates/Users/edit.php:10
+#: ./templates/Users/index.php:22
+#: ./templates/Users/view.php:10
+#: ./templates/Users/view.php:68
+msgid "Actions"
+msgstr ""
+
+#: ./templates/LoginHistorys/add.php:12
+#: ./templates/LoginHistorys/edit.php:17
+#: ./templates/LoginHistorys/view.php:13
+msgid "List Login Historys"
+msgstr ""
+
+#: ./templates/LoginHistorys/add.php:19
+msgid "Add Login History"
+msgstr ""
+
+#: ./templates/LoginHistorys/add.php:28
+#: ./templates/LoginHistorys/edit.php:33
+#: ./templates/Rosters/add.php:31
+#: ./templates/Rosters/edit.php:36
+#: ./templates/Users/add.php:28
+#: ./templates/Users/edit.php:33
+msgid "Submit"
+msgstr ""
+
+#: ./templates/LoginHistorys/edit.php:13
+#: ./templates/LoginHistorys/index.php:39
+#: ./templates/Rosters/edit.php:13
+#: ./templates/Users/edit.php:12
+#: ./templates/Users/index.php:39
+#: ./templates/Users/view.php:83
+msgid "Delete"
+msgstr ""
+
+#: ./templates/LoginHistorys/edit.php:15
+#: ./templates/LoginHistorys/index.php:39
+#: ./templates/LoginHistorys/view.php:12
+#: ./templates/Rosters/edit.php:15
+#: ./templates/Rosters/view.php:12
+#: ./templates/Users/edit.php:14
+#: ./templates/Users/index.php:39
+#: ./templates/Users/view.php:12
+#: ./templates/Users/view.php:83
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: ./templates/LoginHistorys/edit.php:24
+#: ./templates/LoginHistorys/view.php:11
+msgid "Edit Login History"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:8
+#: ./templates/LoginHistorys/view.php:14
+msgid "New Login History"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:9
+msgid "Login Historys"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:37
+#: ./templates/Users/index.php:37
+#: ./templates/Users/view.php:81
+#: ./vendor/cakephp/cakephp/src/View/Helper/PaginatorHelper.php:1260
+msgid "View"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:38
+#: ./templates/Rosters/index.php:59
+#: ./templates/Users/index.php:38
+#: ./templates/Users/view.php:82
+msgid "Edit"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:48
+#: ./templates/Users/index.php:48
+msgid "first"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:49
+#: ./templates/Users/index.php:49
+msgid "previous"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:51
+#: ./templates/Users/index.php:51
+msgid "next"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:52
+#: ./templates/Users/index.php:52
+msgid "last"
+msgstr ""
+
+#: ./templates/LoginHistorys/index.php:54
+#: ./templates/Users/index.php:54
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:12
+msgid "Delete Login History"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:22
+#: ./templates/Rosters/view.php:22
+msgid "User"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:26
+#: ./templates/Rosters/view.php:30
+#: ./templates/Users/view.php:34
+#: ./templates/Users/view.php:66
+msgid "Created User"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:30
+#: ./templates/Rosters/view.php:34
+#: ./templates/Users/view.php:38
+#: ./templates/Users/view.php:67
+msgid "Modified User"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:34
+#: ./templates/Rosters/view.php:38
+#: ./templates/Users/view.php:42
+#: ./templates/Users/view.php:60
+msgid "Id"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:38
+#: ./templates/Users/view.php:62
+msgid "Login Time"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:42
+#: ./templates/Users/view.php:63
+msgid "Logout Time"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:46
+#: ./templates/Rosters/view.php:58
+#: ./templates/Users/view.php:46
+#: ./templates/Users/view.php:64
+msgid "Created"
+msgstr ""
+
+#: ./templates/LoginHistorys/view.php:50
+#: ./templates/Rosters/view.php:62
+#: ./templates/Users/view.php:50
+#: ./templates/Users/view.php:65
+msgid "Modified"
+msgstr ""
+
+#: ./templates/Rosters/add.php:12
+#: ./templates/Rosters/edit.php:17
+#: ./templates/Rosters/view.php:13
+msgid "List Rosters"
+msgstr ""
+
+#: ./templates/Rosters/add.php:19
+msgid "Add Roster"
+msgstr ""
+
+#: ./templates/Rosters/edit.php:24
+#: ./templates/Rosters/view.php:11
+msgid "Edit Roster"
+msgstr ""
+
+#: ./templates/Rosters/index.php:22
+msgid "勤務表"
+msgstr ""
+
+#: ./templates/Rosters/index.php:33
+msgid "search"
+msgstr ""
+
+#: ./templates/Rosters/index.php:41
+msgid "day"
+msgstr ""
+
+#: ./templates/Rosters/index.php:42
+msgid "start_time"
+msgstr ""
+
+#: ./templates/Rosters/index.php:43
+msgid "end_time"
+msgstr ""
+
+#: ./templates/Rosters/index.php:44
+msgid "status"
+msgstr ""
+
+#: ./templates/Rosters/index.php:45
+msgid "reason"
+msgstr ""
+
+#: ./templates/Rosters/stamp.php:15
+msgid "アカウントIDを入力して打刻してください。"
+msgstr ""
+
+#: ./templates/Rosters/view.php:12
+msgid "Delete Roster"
+msgstr ""
+
+#: ./templates/Rosters/view.php:14
+msgid "New Roster"
+msgstr ""
+
+#: ./templates/Rosters/view.php:26
+msgid "Reason"
+msgstr ""
+
+#: ./templates/Rosters/view.php:42
+msgid "Status"
+msgstr ""
+
+#: ./templates/Rosters/view.php:46
+msgid "Start Time"
+msgstr ""
+
+#: ./templates/Rosters/view.php:50
+msgid "End Time"
+msgstr ""
+
+#: ./templates/Rosters/view.php:54
+msgid "Deleted"
+msgstr ""
+
+#: ./templates/Users/add.php:11
+#: ./templates/Users/edit.php:16
+#: ./templates/Users/view.php:13
+msgid "List Users"
+msgstr ""
+
+#: ./templates/Users/add.php:18
+msgid "Add User"
+msgstr ""
+
+#: ./templates/Users/edit.php:23
+#: ./templates/Users/view.php:11
+msgid "Edit User"
+msgstr ""
+
+#: ./templates/Users/index.php:8
+#: ./templates/Users/view.php:14
+msgid "New User"
+msgstr ""
+
+#: ./templates/Users/index.php:9
+msgid "Users"
+msgstr ""
+
+#: ./templates/Users/login.php:6
+msgid "Please enter your username and password"
+msgstr ""
+
+#: ./templates/Users/login.php:10
+msgid "Login"
+msgstr ""
+
+#: ./templates/Users/view.php:12
+msgid "Delete User"
+msgstr ""
+
+#: ./templates/Users/view.php:22
+msgid "Account"
+msgstr ""
+
+#: ./templates/Users/view.php:26
+msgid "Name"
+msgstr ""
+
+#: ./templates/Users/view.php:30
+msgid "Email"
+msgstr ""
+
+#: ./templates/Users/view.php:55
+msgid "Related Login Historys"
+msgstr ""
+
+#: ./templates/Users/view.php:61
+msgid "User Id"
+msgstr ""
+
+#: ./templates/layout/error.php:36
+msgid "Back"
+msgstr ""
+
+#: ./templates/layout/roster.php:26
+msgid "Logout"
+msgstr ""
+
