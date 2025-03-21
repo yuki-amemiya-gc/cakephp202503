@@ -10,17 +10,14 @@ use Cake\I18n\FrozenTime;
 $month = range(0, 12);
 unset($month[0]);
 
-if (empty($condition)) {
-    $default_year = (new FrozenTime())->i18nFormat('YYYY');
-    $default_day = (new FrozenTime())->i18nFormat('M');
-} else {
-    $default_year = $condition['year'];
-    $default_day = $condition['month'];
-}
+
+$default_year = $condition['year'];
+$default_day = $condition['month'];
+
 ?>
 <div class="rosters index content">
     <h3><?= __('勤務表') ?></h3>
-    <?= $this->Form->create() ?>
+    <?= $this->Form->create($rosters, ['type' => 'get']) ?>
     <div style="float: left; padding-right: 10px;">
         <?= $this->Form->select('year', $years, ['value' => $default_year]) ?>
     </div>
