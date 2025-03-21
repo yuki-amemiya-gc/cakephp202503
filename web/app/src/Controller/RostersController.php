@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 use Cake\I18n\FrozenTime;
 
+use Cake\Log\Log;
+
 /**
  * Rosters Controller
  *
@@ -38,7 +40,7 @@ class RostersController extends AppController
             // データ抽出期間を検索条件から生成
             $condition = $this->request->getData();
             $start = new FrozenTime($condition['year'] . '-' . $condition['month'] . '-01' . ' 00:00:00');
-            $end = (clone $start)->addMonth(1);
+            $end = (clone $start)->addMonths(1);
 
             // 勤怠データ取得
             $tmpRosters = $this->Rosters->find()
@@ -117,31 +119,56 @@ class RostersController extends AppController
             $roster->start_time = new FrozenTime($this->request->getQuery('date'));
             $roster->end_time = new FrozenTime($this->request->getQuery('date'));
         } else {
-            $roster = $this->Rosters->get($id, [
-                'contain' => [],
-            ]);
+            $roster = $this->Rosters->get($id, ['contain' => []]);
         }
     
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
-    
+
+            // Debug the incoming data to check start_time and end_time
+            // debug($data['start_time']);
+            // debug($data['end_time']);
+            // exit; // Halt execution to check the values in the browser        
+
             // Convert input times to DateTime format
             $originalStart = $roster->start_time;
             $originalEnd = $roster->end_time;
-    
+            
             try {
-                $startTime = new FrozenTime($data['start_time']);
-                $endTime = new FrozenTime($data['end_time']);
-    
-                // Preserve the original date and only update hour, minute, second
-                $newStart = $originalStart->setTime($startTime->hour, $startTime->minute, $startTime->second);
-                $newEnd = $originalEnd->setTime($endTime->hour, $endTime->minute, $endTime->second);
-    
-                $roster->start_time = $newStart;
-                $roster->end_time = $newEnd;
+                // Check if start_time and end_time are provided
+                if (empty($data['start_time']) || empty($data['end_time'])) {
+                    $this->Flash->error(__('Start time and end time cannot be empty.'));
+                    return $this->redirect($this->referer());
+                }
+
+                // Log::write('debug', 'Start Time: ' . $data['start_time']);
+                // Log::write('debug', 'End Time: ' . $data['end_time']);
+
+                $startTime = FrozenTime::createFromFormat('H:i:s', trim($data['start_time']));
+
+                
+                $endTime = FrozenTime::createFromFormat('H:i:s', trim($data['end_time']));
+            
+                // If parsing failed, show an error
+                if (!$startTime || !$endTime || !$startTime->getTimestamp() || !$endTime->getTimestamp()) {
+                    throw new \Exception('Invalid time format.');
+                }
+            
+                // Preserve original date, update only time
+                $roster->start_time = $originalStart->setTime($startTime->hour, $startTime->minute, 0);
+                $roster->end_time = $originalEnd->setTime($endTime->hour, $endTime->minute, 0);
+            
             } catch (\Exception $e) {
+                // Log the error message
+                // Log::write('debug', 'Error parsing time: ' . $e->getMessage());
+            
+                // Provide user feedback
                 $this->Flash->error(__('Invalid time format.'));
+                return $this->redirect($this->referer());
             }
+    
+            // Remove start_time and end_time from data before patching
+            unset($data['start_time'], $data['end_time']);
     
             $roster = $this->Rosters->patchEntity($roster, $data, ['fields' => ['status', 'reason']]);
     
@@ -149,6 +176,7 @@ class RostersController extends AppController
                 $this->Flash->success(__('The roster has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
+    
             $this->Flash->error(__('The roster could not be saved. Please, try again.'));
         }
     
