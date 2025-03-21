@@ -17,7 +17,7 @@ msgstr ""
 #: ./src/Controller/LoginHistorysController.php:56
 #: ./src/Controller/LoginHistorysController.php:81
 msgid "The login history has been saved."
-msgstr ""
+msgstr "ログイン履歴を正常に保存しました。"
 
 #: ./src/Controller/LoginHistorysController.php:60
 #: ./src/Controller/LoginHistorysController.php:85
@@ -26,21 +26,21 @@ msgstr ""
 
 #: ./src/Controller/LoginHistorysController.php:103
 msgid "The login history has been deleted."
-msgstr ""
+msgstr "ログイン履歴を正常に削除しました。"
 
 #: ./src/Controller/LoginHistorysController.php:105
 msgid "The login history could not be deleted. Please, try again."
-msgstr ""
+msgstr "ログイン履歴を削除できませんでした。もう一度お試しください。"
 
 #: ./src/Controller/RostersController.php:94
 #: ./src/Controller/RostersController.php:176
 msgid "The roster has been saved."
-msgstr ""
+msgstr "出勤情報を正常に保存しました。"
 
 #: ./src/Controller/RostersController.php:98
 #: ./src/Controller/RostersController.php:180
 msgid "The roster could not be saved. Please, try again."
-msgstr ""
+msgstr "出勤情報を保存できませんでした。もう一度お試しください。"
 
 #: ./src/Controller/RostersController.php:140
 msgid "Start time and end time cannot be empty."
@@ -52,15 +52,15 @@ msgstr ""
 
 #: ./src/Controller/RostersController.php:199
 msgid "The roster has been deleted."
-msgstr ""
+msgstr "出勤情報を正常に削除しました。"
 
 #: ./src/Controller/RostersController.php:201
 msgid "The roster could not be deleted. Please, try again."
-msgstr ""
+msgstr "出勤情報を削除できませんでした、もう一度お試しください。"
 
 #: ./src/Controller/UsersController.php:43
 msgid "Invalid username or password"
-msgstr ""
+msgstr "ユーザ名またはパスワードが不正です。"
 
 #: ./templates/LoginHistorys/add.php:11
 #: ./templates/LoginHistorys/edit.php:11
@@ -76,7 +76,7 @@ msgstr ""
 #: ./templates/Users/view.php:10
 #: ./templates/Users/view.php:68
 msgid "Actions"
-msgstr ""
+msgstr "アクション"
 
 #: ./templates/LoginHistorys/add.php:12
 #: ./templates/LoginHistorys/edit.php:17
@@ -104,7 +104,7 @@ msgstr ""
 #: ./templates/Users/index.php:39
 #: ./templates/Users/view.php:83
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #: ./templates/LoginHistorys/edit.php:15
 #: ./templates/LoginHistorys/index.php:39
@@ -116,7 +116,7 @@ msgstr ""
 #: ./templates/Users/view.php:12
 #: ./templates/Users/view.php:83
 msgid "Are you sure you want to delete # {0}?"
-msgstr ""
+msgstr "# {0}を削除します。よろしいですか。"
 
 #: ./templates/LoginHistorys/edit.php:24
 #: ./templates/LoginHistorys/view.php:11
@@ -144,7 +144,7 @@ msgstr ""
 #: ./templates/Users/index.php:38
 #: ./templates/Users/view.php:82
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: ./templates/LoginHistorys/index.php:48
 #: ./templates/Users/index.php:48
@@ -229,7 +229,7 @@ msgstr ""
 #: ./templates/Rosters/edit.php:17
 #: ./templates/Rosters/view.php:13
 msgid "List Rosters"
-msgstr ""
+msgstr "勤務表"
 
 #: ./templates/Rosters/add.php:19
 msgid "Add Roster"
@@ -238,35 +238,35 @@ msgstr ""
 #: ./templates/Rosters/edit.php:24
 #: ./templates/Rosters/view.php:11
 msgid "Edit Roster"
-msgstr ""
+msgstr "編集"
 
 #: ./templates/Rosters/index.php:22
-msgid "勤務表"
-msgstr ""
+msgid "Rosters"
+msgstr "勤務表"
 
 #: ./templates/Rosters/index.php:33
 msgid "search"
-msgstr ""
+msgstr "検索"
 
 #: ./templates/Rosters/index.php:41
 msgid "day"
-msgstr ""
+msgstr "日付"
 
 #: ./templates/Rosters/index.php:42
 msgid "start_time"
-msgstr ""
+msgstr "出勤"
 
 #: ./templates/Rosters/index.php:43
 msgid "end_time"
-msgstr ""
+msgstr "退勤"
 
 #: ./templates/Rosters/index.php:44
 msgid "status"
-msgstr ""
+msgstr "ステータス"
 
 #: ./templates/Rosters/index.php:45
 msgid "reason"
-msgstr ""
+msgstr "事由"
 
 #: ./templates/Rosters/stamp.php:15
 msgid "アカウントIDを入力して打刻してください。"
@@ -282,19 +282,19 @@ msgstr ""
 
 #: ./templates/Rosters/view.php:26
 msgid "Reason"
-msgstr ""
+msgstr "事由"
 
 #: ./templates/Rosters/view.php:42
 msgid "Status"
-msgstr ""
+msgstr "ステータス"
 
 #: ./templates/Rosters/view.php:46
 msgid "Start Time"
-msgstr ""
+msgstr "出勤時刻"
 
 #: ./templates/Rosters/view.php:50
 msgid "End Time"
-msgstr ""
+msgstr "退勤時刻"
 
 #: ./templates/Rosters/view.php:54
 msgid "Deleted"
@@ -318,31 +318,31 @@ msgstr ""
 #: ./templates/Users/index.php:8
 #: ./templates/Users/view.php:14
 msgid "New User"
-msgstr ""
+msgstr "ユーザ新規作成"
 
 #: ./templates/Users/index.php:9
 msgid "Users"
-msgstr ""
+msgstr "ユーザ名"
 
 #: ./templates/Users/login.php:6
 msgid "Please enter your username and password"
-msgstr ""
+msgstr "ユーザ名とパスワードを入力"
 
 #: ./templates/Users/login.php:10
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: ./templates/Users/view.php:12
 msgid "Delete User"
-msgstr ""
+msgstr "ユーザを削除"
 
 #: ./templates/Users/view.php:22
 msgid "Account"
-msgstr ""
+msgstr "アカウント"
 
 #: ./templates/Users/view.php:26
 msgid "Name"
-msgstr ""
+msgstr "名前"
 
 #: ./templates/Users/view.php:30
 msgid "Email"
