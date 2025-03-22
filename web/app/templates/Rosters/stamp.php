@@ -17,5 +17,9 @@
         <?= $this->Form->button('出勤', ['value' => 'sta', 'name' => 'kubun']); ?>
         <?= $this->Form->button('退勤', ['value' => 'end', 'name' => 'kubun']); ?>
         <?= $this->Form->end() ?>
+
+        <div style="margin-top: 20px;">
+            <?= $this->Html->link('勤怠一覧へ', ['controller' => 'Rosters', 'action' => 'index'], ['class' => 'button']) ?>
+        </div>
     </div>
 </div>
